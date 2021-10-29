@@ -10,9 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//criamos nosso schema 'modelo' para criar nossa tabela. escolhemos que o username seja nosso id para que não possa ser repetido.
 model User {
-  //criamos nosso schema 'modelo' para criar nossa tabela.
-  username    String @id //escolhemos que o username seja nosso id para que não possa ser repetido.
-  password    String
-  displayName String
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique //unique faz que o campo não possa ser repetido.
+  role      String   @default("USER") // definimos que todos os usuarios são user por defaul, depois pode ser ADM.
+  status    Boolean  @default(true) // definimos que por padrão (default) é true.
+  password  String
+  updatedAt DateTime @updatedAt // gruarda o tempo quando for atualizado por ultima vez.
+  createdAt DateTime @default(now()) // cria por defaul a hora criada (now() *agora*).
+
 }
