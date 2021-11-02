@@ -15,4 +15,9 @@ export class MoviesController {
   findMany(): Promise<Movie[]> {
     return this.services.findMany();
   }
+
+  @Get('find/:id')
+  findOne(@Param('id') id: string): Promise<Movie> {
+    return this.services.findOne(id);
+  }
 }
