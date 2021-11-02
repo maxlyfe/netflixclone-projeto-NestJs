@@ -31,4 +31,12 @@ export class MoviesService {
 
     return movie;
   }
+
+  async deleteOne(id: string) {
+    await this.db.movie.delete({
+      where: { id },
+    });
+
+    return 'Filme deletado';
+  }
 }

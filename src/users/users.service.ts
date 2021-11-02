@@ -55,4 +55,12 @@ export class UsersService {
     const newUser = user.map(({ password, ...resto }) => resto);
     return newUser;
   }
+
+  async deleteOne(id: string) {
+    await this.db.user.delete({
+      where: { id },
+    });
+
+    return 'Usuario deletado';
+  }
 }
