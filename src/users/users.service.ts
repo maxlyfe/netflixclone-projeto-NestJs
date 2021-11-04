@@ -22,8 +22,8 @@ export class UsersService {
     if (userExists) {
       throw new ConflictException('Email já está cadastrado');
     }
-
-    const hashedPassword = await bcrypt.hash(data.password, 10);
+    const salt = 10;
+    const hashedPassword = await bcrypt.hash(data.password, salt);
 
     const user = await this.db.user.create({
       data: {
@@ -56,11 +56,13 @@ export class UsersService {
     return newUser;
   }
 
-  async deleteOne(id: string) {
+  async deleteOne(id: string): Promise<{ message: string }> {
     await this.db.user.delete({
       where: { id },
     });
 
-    return 'Usuario deletado';
+    return {
+      message: 'Item deletado com sucesso.',
+    };
   }
 }

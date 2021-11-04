@@ -32,11 +32,13 @@ export class MoviesService {
     return movie;
   }
 
-  async deleteOne(id: string) {
+  async deleteOne(id: string): Promise<{ message: string }> {
     await this.db.movie.delete({
       where: { id },
     });
 
-    return 'Filme deletado';
+    return {
+      message: 'Item deletado com sucesso.',
+    };
   }
 }

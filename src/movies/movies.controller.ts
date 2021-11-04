@@ -22,7 +22,7 @@ export class MoviesController {
   }
 
   @Delete('delete/:id')
-  deleteOne(@Param('id') id: string) {
+  deleteOne(@Param('id') id: string): Promise<{ message: string }> {
     return this.services.deleteOne(id);
   }
 }
