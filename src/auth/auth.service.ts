@@ -18,11 +18,9 @@ export class AuthService {
       throw new NotFoundException('Usuário não cadastrado.');
     }
 
-    const salt = 10;
-    const hash = await bcrypt.hash(password, salt);
-    console.log(hash);
+    const hashValid = await bcrypt.compare(password, user.password);
 
-    if (hash === password) {
+    if (hashValid) {
       return 'Login ok';
     } else {
       return 'Login Fail';
