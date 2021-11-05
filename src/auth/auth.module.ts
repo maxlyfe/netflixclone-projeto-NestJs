@@ -4,12 +4,13 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { jwtConstant } from './jwt.constants';
 
 @Module({
   imports: [
     PassportModule,
     JwtModule.register({
-      secret: 'DeasdfFESsdfoakdwADWADS5a+wda9cxz;@²',
+      secret: jwtConstant.secret,
       signOptions: { expiresIn: '1h' },
     }),
   ],
