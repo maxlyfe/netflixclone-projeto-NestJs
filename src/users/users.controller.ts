@@ -14,7 +14,8 @@ import { UsersService } from './users.service';
 import { UserRole } from './enum/role.enum';
 import { SimpleGuard } from 'src/auth/simple.guard';
 import { AuthGuard } from '@nestjs/passport';
-import AuthUser from 'src/auth/auth-user.decorator';
+import { Role } from 'src/auth/role.decorator';
+import { RolesGuard } from 'src/auth/roles.guard';
 @Controller()
 export class UsersController {
   constructor(private service: UsersService) {}
@@ -25,8 +26,9 @@ export class UsersController {
     return this.service.create(data, UserRole.USER);
   }
 
-  @UseGuards(AuthGuard())
   @Post('create-admin')
+  @Role(UserRole.ADMIN)
+  @UseGuards(AuthGuard(), RolesGuard)
   createAdmin(@Body() data: CreateUserDto): Promise<User> {
     delete data.passwordConfirmation;
     return this.service.create(data, UserRole.ADMIN);
