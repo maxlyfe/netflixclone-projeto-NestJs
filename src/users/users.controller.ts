@@ -41,7 +41,7 @@ export class UsersController {
   }
 
   @UseGuards(AuthGuard())
-  @Get('find-many')
+  @Get('find-all')
   findMany() {
     return this.service.findMany();
   }
