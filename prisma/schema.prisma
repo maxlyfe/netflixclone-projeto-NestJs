@@ -20,16 +20,18 @@ model User {
   password  String
   updatedAt DateTime @updatedAt // gruarda o tempo quando for atualizado por ultima vez.
   createdAt DateTime @default(now()) // cria por defaul a hora criada (now() *agora*).
+  movies    Movie[]
 
 }
 
 model Movie {
   id        String   @id @default(uuid())
   name      String
-  year      DateTime
-  length    DateTime
+  year      String
+  length    String
   storyLine String
   image     String
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
+  user      User[]
 }

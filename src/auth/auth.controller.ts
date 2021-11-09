@@ -1,8 +1,9 @@
-import { Controller, Body, Post, Get } from '@nestjs/common';
+import { Controller, Body, Post, Get, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import AuthUser from './auth-user.decorator';
 import { LoginDto, AuthResponse } from './dto/login.dto';
 import { User } from '@prisma/client';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
@@ -14,6 +15,7 @@ export class AuthController {
   }
 
   @Get('me')
+  @UseGuards(AuthGuard())
   me(@AuthUser() user: User): User {
     return user;
   }
